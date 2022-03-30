@@ -1,18 +1,18 @@
-Name : Execution des tests
-On : [push, workflow_dispatch]
-  jobs :
-  runs-on : ubuntu-latest
-  steps :
-      name : checkout repository
-    - uses: actions/checkout@v3
-      name : Install dependencies
-      run : npm install –global newman
-      name : run postman tests
-      run : newman run collection.json -r cli,junit
-    - name: publish junit reports
-      uses: dorny/test-reporter@v1
-      if: always()    # run this step even if previous step failed
-      with:
-        name: API Tests            # Name of the check run which will be created
-        path: newman/ -*.xml    # Path to test results
-        reporter: java-junit        # Format of test results
+name : Execution des tests
+on : [push, workflow_dispatch]
+jobs :
+    runs-on : ubuntu-latest
+    steps :
+        name : checkout repository
+      - uses: actions/checkout@v3
+        name : Install dependencies
+        run : npm install –global newman
+        name : run postman tests
+        run : newman run collection.json -r cli,junit
+      - name: publish junit reports
+        uses: dorny/test-reporter@v1
+        if: always()    # run this step even if previous step failed
+        with:
+          name: API Tests            # Name of the check run which will be created
+          path: newman/ -*.xml    # Path to test results
+          reporter: java-junit        # Format of test results

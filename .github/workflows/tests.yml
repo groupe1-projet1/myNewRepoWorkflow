@@ -9,7 +9,7 @@ jobs:
     - name: install newman
       run: npm install -g newman
     - name: run collection
-      run: newman run "https://www.postman.com/collections/d57c23a83c933d77706a" -e postman_environment.json -r cli,junit
+      run: newman run "https://www.postman.com/collections/d57c23a83c933d77706a" -e postman_environment.json -r cli,junit,htmlextra
     - name: publish junit reports
       uses: dorny/test-reporter@v1
       if: always()    # run this step even if previous step failed
@@ -17,12 +17,12 @@ jobs:
         name: API Tests            # Name of the check run which will be created
         path: newman/*.xml    # Path to test results
         reporter: java-junit        # Format of test results
-      - name: Publier le rapport HTML
-        uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: test-report-${{ github.run_id }}
-          path: newman/*.html
+    - name: Publier le rapport HTML
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: test-report-${{ github.run_id }}
+        path: newman/*.html
 
 
 

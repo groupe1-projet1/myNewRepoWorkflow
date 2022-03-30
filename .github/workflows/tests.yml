@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Install dependencies
-      run: npm install –global newman
+      run: npm install –g newman
     - name: run collection
       run: newman run collection.json -r cli,junit
       #   name: checkout repository

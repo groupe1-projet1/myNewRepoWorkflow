@@ -1,15 +1,15 @@
-name : Execution des tests
-on : [push, workflow_dispatch]
-jobs :
+name: Execution des tests
+on: [push, workflow_dispatch]
+jobs:
   Explore-GitHub-Actions:
-    runs-on : ubuntu-latest
-    steps :
-        name : checkout repository
+    runs-on: ubuntu-latest
+    steps:
+        name: checkout repository
       - uses: actions/checkout@v3
-        name : Install dependencies
-        run : npm install –global newman
-        name : run postman tests
-        run : newman run collection.json -r cli,junit
+        name: Install dependencies
+        run: npm install –global newman
+        name: run postman tests
+        run: newman run collection.json -r cli,junit
       - name: publish junit reports
         uses: dorny/test-reporter@v1
         if: always()    # run this step even if previous step failed

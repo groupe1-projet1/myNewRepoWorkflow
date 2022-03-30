@@ -16,18 +16,3 @@ On : [push, workflow_dispatch]
         name: API Tests            # Name of the check run which will be created
         path: newman/ -*.xml    # Path to test results
         reporter: java-junit        # Format of test results
-
-	Name : checkout repository
-Uses : actioncheckoutv3
-Name : Install dependencies
-Run : npm install –global newman
-Name : run postman tests
-Run : newman run collection.json -r cli,junit
-
-      - name: publish junit reports
-        uses: dorny/test-reporter@v1
-        if: always()    # run this step even if previous step failed
-        with:
-          name: API Tests            # Name of the check run which will be created
-          path: newman/ -*.xml    # Path to test results
-          reporter: java-junit        # Format of test results

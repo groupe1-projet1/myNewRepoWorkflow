@@ -1,5 +1,5 @@
 name: Execution des tests
-on: [push]
+on: [push, workflow_dispatch]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
@@ -7,7 +7,7 @@ jobs:
     - name: checkout repository
       uses: actions/checkout@v3
     - name: install newman
-      run: npm install -g newman
+      run: npm install --global newman newman-reporter-htmlextra
     - name: run collection
       run: newman run "https://www.postman.com/collections/d57c23a83c933d77706a" -e postman_environment.json -r cli,junit,htmlextra
     - name: publish junit reports

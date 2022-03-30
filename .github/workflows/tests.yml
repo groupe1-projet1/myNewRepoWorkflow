@@ -15,7 +15,7 @@ jobs:
       if: always()    # run this step even if previous step failed
       with:
         name: API Tests            # Name of the check run which will be created
-        path: newman/ -*.xml    # Path to test results
+        path: newman/-*.xml    # Path to test results
         reporter: java-junit        # Format of test results
 
 
